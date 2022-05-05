@@ -3,5 +3,5 @@ format:
 		--ignore-unparsable-files \
 		--in-place \
 		--recursive \
-		./Example ./Package.swift ./Sources ./Tests
+		./Package.swift ./Sources ./Tests
     
