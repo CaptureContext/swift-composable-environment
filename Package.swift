@@ -35,52 +35,56 @@ let package = Package(
       targets: ["GlobalEnvironment"]
     ),
   ],
-  dependencies: [
-    .package(url: "https://github.com/pointfreeco/swift-composable-architecture", from: "0.21.0")
-  ],
   targets: [
+    .target(name: "_Dependencies"),
+    .target(
+      name: "_DependencyAliases",
+      dependencies: [
+        .target(name: "ComposableDependencies")
+      ]
+    ),
+    .testTarget(
+      name: "DependencyAliasesTests",
+      dependencies: [
+        .target(name: "_DependencyAliases")
+      ]
+    ),
+    
     .target(
       name: "ComposableDependencies",
-      dependencies: ["_Dependencies"]
+      dependencies: [
+        .target(name: "_Dependencies")
+      ]
     ),
-
+    
     .target(
       name: "ComposableEnvironment",
       dependencies: [
-        .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        "ComposableDependencies",
-        "_Dependencies",
-        "_DependencyAliases",
+        .target(name: "ComposableDependencies"),
+        .target(name: "_Dependencies"),
+        .target(name: "_DependencyAliases"),
       ]
     ),
     .testTarget(
       name: "ComposableEnvironmentTests",
-      dependencies: ["ComposableEnvironment"]
+      dependencies: [
+        .target(name: "ComposableEnvironment")
+      ]
     ),
-
-    .target(name: "_Dependencies"),
-
-    .target(
-      name: "_DependencyAliases",
-      dependencies: ["ComposableDependencies"]
-    ),
-    .testTarget(
-      name: "DependencyAliasesTests",
-      dependencies: ["_DependencyAliases"]
-    ),
-
+    
     .target(
       name: "GlobalEnvironment",
       dependencies: [
-        .product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-        "ComposableDependencies",
-        "_Dependencies",
-        "_DependencyAliases",
+        .target(name: "ComposableDependencies"),
+        .target(name: "_Dependencies"),
+        .target(name: "_DependencyAliases"),
       ]
     ),
     .testTarget(
       name: "GlobalEnvironmentTests",
-      dependencies: ["GlobalEnvironment"]
+      dependencies: [
+        .target(name: "GlobalEnvironment")
+      ]
     ),
   ]
 )
