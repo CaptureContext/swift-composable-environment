@@ -49,14 +49,14 @@ let package = Package(
         .target(name: "_DependencyAliases")
       ]
     ),
-    
+
     .target(
       name: "ComposableDependencies",
       dependencies: [
         .target(name: "_Dependencies")
       ]
     ),
-    
+
     .target(
       name: "ComposableEnvironment",
       dependencies: [
@@ -71,7 +71,7 @@ let package = Package(
         .target(name: "ComposableEnvironment")
       ]
     ),
-    
+
     .target(
       name: "GlobalEnvironment",
       dependencies: [
